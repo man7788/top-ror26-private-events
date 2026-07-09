@@ -1,0 +1,13 @@
+<h1>User <%= params[:id] %></h1>
+<% if @events %>
+  <ul>
+    <% @events.each do |e| %>
+        <li>
+          <article>
+            <h2><%=e.name %></h2>
+            <%= e.event_date %>
+          </article>
+        </li>
+  <% end %>
+   </ul>
+<% end %>
