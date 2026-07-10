@@ -1,4 +1,11 @@
 <h1>User <%= params[:id] %></h1>
+
+<%= render "shared/nav", user: @user %>
+
+<% if @user %>
+  <%= link_to "New Event", new_event_path %>
+<% end %>
+
 <% if @events %>
   <ul>
     <% @events.each do |e| %>
