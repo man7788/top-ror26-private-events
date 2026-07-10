@@ -1,13 +1,12 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :set_user, only: [ :index, :new, :show ]
 
   def index
-    @user = current_user
     @events = Event.all
   end
 
   def new
-    @user = current_user
     @event = Event.new
   end
 
@@ -23,7 +22,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def show
+    @event = Event.where(id: params[:id]).first
+
+    if @event.nil?
+      redirect_to root_path, alert: "Event not found"
+    end
+  end
+
   private
+
+  def set_user
+    @user = current_user
+  end
 
   def event_params
     params.expect(event: [ :name, :event_date ])
