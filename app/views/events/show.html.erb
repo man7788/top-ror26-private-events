@@ -1,0 +1,9 @@
+<h1><%= @event.name %></h1>
+
+<%= render "shared/nav", user: @user %>
+
+<ul>
+  <li>Date: <%= @event.event_date %></li>
+  <li>Created By: <%= @event.creator.email %></li>
+</ul>
+
