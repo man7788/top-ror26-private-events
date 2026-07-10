@@ -1,8 +1,14 @@
 <h1>Events</h1>
+
+<%= render "shared/nav", user: @user%>
+
+<% if @user %>
+  <h2>Welcome back <%= @user.email %>!</h2>
+<% end %>
+
 <% if @events %>
   <ul>
     <% @events.each do |e| %>
-      
         <li>
           <article>
             <h2><%=e.name %></h2>
@@ -11,4 +17,15 @@
         </li>
   <% end %>
    </ul>
+<% end %>
+
+<% if @user %>
+  <nav>
+    <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+  </nav>
+<% else %>
+  <nav>
+    <%= button_to "Sign in", new_user_session_path%>
+    <%= link_to "Sign up", new_user_registration_path%>
+  </nav>
 <% end %>
