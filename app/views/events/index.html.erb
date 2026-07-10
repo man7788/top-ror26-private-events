@@ -1,31 +1,32 @@
 <h1>Events</h1>
 
-<%= render "shared/nav", user: @user%>
+<%= render "shared/nav", user: @user %>
 
-<% if @user %>
-  <h2>Welcome back <%= @user.email %>!</h2>
-<% end %>
-
-<% if @events %>
-  <ul>
-    <% @events.each do |e| %>
-        <li>
-          <article>
-            <h2><%=e.name %></h2>
-            <%= e.event_date %>
-          </article>
-        </li>
-  <% end %>
-   </ul>
-<% end %>
-
-<% if @user %>
-  <nav>
-    <%= button_to "Log out", destroy_user_session_path, method: :delete %>
-  </nav>
+<% if flash[:alert] %>
+    <h2><%= flash[:alert] %></h2>
 <% else %>
-  <nav>
-    <%= button_to "Sign in", new_user_session_path%>
-    <%= link_to "Sign up", new_user_registration_path%>
-  </nav>
+  <% if @user %>
+    <h2>Welcome back <%= @user.email %>!</h2>
+  <% end %>
+
+  <% if @events %>
+    <ul>
+      <% @events.each do |e| %>
+        <li>
+          <h2><%= link_to e.name, event_path(e.id) %></h2>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @user %>
+    <nav>
+      <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+    </nav>
+  <% else %>
+    <nav>
+      <%= button_to "Sign in", new_user_session_path%>
+      <%= link_to "Sign up", new_user_registration_path%>
+    </nav>
+  <% end %>
 <% end %>
