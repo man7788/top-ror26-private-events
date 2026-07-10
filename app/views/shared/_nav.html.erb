@@ -1,0 +1,8 @@
+<nav>
+  <%= link_to "Home", root_path %>
+  <% if @user %>
+    <nav>
+      <%= link_to "Profile", user_path(@user.id) %>
+    </nav>
+  <% end %>
+</nav>
