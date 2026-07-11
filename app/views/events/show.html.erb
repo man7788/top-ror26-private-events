@@ -7,6 +7,15 @@
   <li>Created By: <%= @event.creator.email %></li>
 </ul>
 
+<h2>People who are attending this event:</h2>
+<ul>
+  <% @attendees.each do |a| %>
+    <li>
+      <%= a %>
+    </li>
+  <% end %>
+</ul>
+
 <% if @attended %>
   <p>You are registered for this event.</p>
 <% else %>
