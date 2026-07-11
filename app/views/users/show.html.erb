@@ -6,15 +6,26 @@
   <%= link_to "New Event", new_event_path %>
 <% end %>
 
-<% if @events %>
-  <ul>
-    <% @events.each do |e| %>
-        <li>
-          <article>
-            <h2><%=e.name %></h2>
-            <%= e.event_date %>
-          </article>
-        </li>
+<h2>Created Events:</h2>
+<ul>
+  <% @events.each do |e| %>
+      <li>
+        <article>
+          <h3><%=e.name %></h3>
+          <%= e.event_date %>
+        </article>
+      </li>
   <% end %>
-   </ul>
-<% end %>
+  </ul>
+
+<h2>Registered Events:</h2>
+<ul>
+  <% @attended_events.each do |e| %>
+    <li>
+      <article>
+        <h3><%=e.name %></h3>
+        <%= e.event_date %>
+      </article>
+    </li>
+  <% end %>
+</ul>
