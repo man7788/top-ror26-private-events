@@ -28,6 +28,11 @@ class EventsController < ApplicationController
 
     @event = Event.where(id: params[:id]).first
 
+    @attendees = []
+    EventAttendance.where(event_id: params[:id]).includes(:attendee).each do |e|
+      @attendees.push(e.attendee.email)
+    end
+
     if @event.nil?
       redirect_to root_path, alert: "Event not found"
     end
