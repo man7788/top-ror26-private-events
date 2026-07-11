@@ -7,3 +7,12 @@
   <li>Created By: <%= @event.creator.email %></li>
 </ul>
 
+<% if @attended %>
+  <p>You are registered for this event.</p>
+<% else %>
+  <%= form_with model: @event_attendance do |form| %>
+    <%= form.label :event_id, 'Do you want to attend this event?' %><br>
+    <%= form.hidden_field :event_id, value: @event.id %>
+    <%= form.submit "Yes" %>
+  <% end %>
+<% end %>
