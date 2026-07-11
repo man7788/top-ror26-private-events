@@ -23,6 +23,9 @@ class EventsController < ApplicationController
   end
 
   def show
+    @attended = EventAttendance.find_by(attendee_id: current_user.id, event_id: params[:id])
+    @event_attendance = EventAttendance.new unless @attended
+
     @event = Event.where(id: params[:id]).first
 
     if @event.nil?
