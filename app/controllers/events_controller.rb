@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_user, only: [ :index, :new, :show ]
+  before_action :set_events_timeline, only: [ :index ]
 
   def index
     @events = Event.all
@@ -39,6 +40,19 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def set_events_timeline
+    set_future_events
+    set_past_events
+  end
+
+  def set_future_events
+    @future_events = Event.where("event_date > ?", Time.now)
+  end
+
+  def set_past_events
+    @past_events = Event.where("event_date < ?", Time.now)
+  end
 
   def set_user
     @user = current_user
