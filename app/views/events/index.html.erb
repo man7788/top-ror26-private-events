@@ -9,15 +9,23 @@
     <h2>Welcome back <%= @user.email %>!</h2>
   <% end %>
 
-  <% if @events %>
-    <ul>
-      <% @events.each do |e| %>
-        <li>
-          <h2><%= link_to e.name, event_path(e.id) %></h2>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+  <h3>Future Events:</h3>
+  <ul>
+    <% @future_events.each do |e| %>
+      <li>
+        <%= link_to e.name, event_path(e.id) %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h3>Past Events:</h3>
+  <ul>
+    <% @past_events.each do |e| %>
+      <li>
+        <%= link_to e.name, event_path(e.id) %>
+      </li>
+    <% end %>
+  </ul>
 
   <% if @user %>
     <nav>
