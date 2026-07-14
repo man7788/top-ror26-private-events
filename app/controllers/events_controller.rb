@@ -23,10 +23,11 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.where(id: params[:id]).first
+    @creator = @event.creator.id == current_user.id
+
     @attended = EventAttendance.find_by(attendee_id: current_user.id, event_id: params[:id])
     @event_attendance = EventAttendance.new unless @attended
-
-    @event = Event.where(id: params[:id]).first
 
     @attendees = []
     EventAttendance.where(event_id: params[:id]).includes(:attendee).each do |e|
