@@ -7,6 +7,16 @@
   <li>Created By: <%= @event.creator.email %></li>
 </ul>
 
+<b><%= flash[:alert] %></b>
+<% if @creator %>
+  <%= form_with model: @event_attendance do |form| %>
+    <%= form.hidden_field :event_id, value: @event.id %>
+    <%= form.label :user_email, 'Invite a user to this event:' %><br>
+    <%= form.email_field :user_email %><br>
+    <%= form.submit "Submit" %>
+  <% end %>
+<% end %>
+
 <h2>People who are attending this event:</h2>
 <ul>
   <% @attendees.each do |a| %>
@@ -18,10 +28,4 @@
 
 <% if @attended %>
   <p>You are registered for this event.</p>
-<% else %>
-  <%= form_with model: @event_attendance do |form| %>
-    <%= form.label :event_id, 'Do you want to attend this event?' %><br>
-    <%= form.hidden_field :event_id, value: @event.id %>
-    <%= form.submit "Yes" %>
-  <% end %>
 <% end %>
